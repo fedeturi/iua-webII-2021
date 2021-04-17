@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="Estilo06.css">
+</head>
+
+<body>
+    <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+    <h2>
+        Bienvenido a Nuestra Encuesta
+    </h2>
+    <form action="encuesta.php" method="GET">
+        <table>
+            <tr>
+                <td>
+                    <label for="surname">Ingresa tu Apellido:</label>
+                </td>
+                <td>
+                    <input type="text" name='surname' id='surname'>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="name">Ingresa tu Nombre:</label>
+                </td>
+                <td>
+                    <input type="text" name='name' id='name'>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="mail">Ingresa tu Correo Electrónico:</label>
+                </td>
+                <td>
+                    <input type="email" name='mail' id='mail'>
+                </td>
+            </tr>
+            <tr>
+                <td rowspan="2">
+                    <label for="sex">Sexo:</label>
+                </td>
+                <td>
+                    <input type='radio' name="sex" checked value="masculino">Masculino
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type='radio' name="sex" value='femenino'>Femenino
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Selecciona los Productos de tu preferencia
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="checkbox" value="electronica">
+                </td>
+                <td>
+                    Electrónica
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="checkbox" value="celulares">
+                </td>
+                <td>
+                    Celulares
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="checkbox" value="led-tv">
+                </td>
+                <td>
+                    Televisores Led
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="checkbox" value="informatica">
+                </td>
+                <td>
+                    Informática
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <label for="comment">Dejanos tus Comentarios y Preferencias Aquí</label>
+                </td>
+                <td>
+                    <textarea name="comment" id="" cols="20" rows="10"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <button>Enviar Datos</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+    <script src="" async defer></script>
+</body>
+
+</html>

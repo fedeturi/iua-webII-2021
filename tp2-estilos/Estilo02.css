@@ -1,0 +1,35 @@
+h1 {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    background-color: yellowgreen;
+    color: black;
+}
+
+h2 {
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    background-color:blueviolet;
+    color: burlywood;
+}
+
+h3 {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    background-color:cadetblue ;
+    color:darkblue
+}
+
+h4 {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    background-color:blueviolet;
+    color: burlywood;
+}
+
+h5 {
+    font-family: monospace;
+    background-color:rgb(18, 15, 136);
+    color: rgb(194, 255, 214);
+}
+
+h6 {
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif ;
+    background-color:rgb(51, 11, 90);
+    color: burlywood;
+}

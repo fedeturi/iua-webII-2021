@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="Estilo08.css">
+</head>
+
+<body>
+    <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+    <div class="container-out">
+        <form action="vuelos.php" method="GET">
+
+            <h3>
+                Vuelos
+            </h3>
+            <input type="radio" name="tramo" id="" class="check" checked value="ida-vuelta">
+            <label for="ida-vuelta"> Ida y vuelta</label>
+            <input type="radio" name="tramo" id="" class="check" value="ida">
+            <label for="ida"> Sólo ida</label>
+            <input type="radio" name="tramo" id="" class="check" value="multi">
+            <label for="multi"> Multidestino</label>
+            <table>
+                <tr>
+                    <td>
+                        ORIGEN
+                    </td>
+                    <td>
+                        DESTINO
+                    </td>
+                    <td colspan="2">
+                        FECHAS
+                    </td>
+                    <td>
+                        PASAJEROS Y CLASE
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>
+                        <input list="origen" placeholder="&#x1f6eb COR Cordoba">
+                        <datalist id="origen">
+                            <option value="&#x1f6eb COR Cordoba">&#x1f6eb COR Cordoba</option>
+                            <option value="&#x1f6eb AEP Aeroparque">&#x1f6eb AEP Aeroparque</option>
+                            <option value="&#x1f6eb EZE Ezeiza">&#x1f6eb EZE Ezeiza</option>
+                            <option value="&#x1f6eb SCL Santiago de Chile">&#x1f6eb SCL Santiago de Chile</option>
+                            <option value="&#x1f6eb MDZ Mendoza">&#x1f6eb MDZ Mendoza</option>
+                            <option value="&#x1f6eb LIM Lima">&#x1f6eb LIM Lima</option>
+                        </datalist>
+                    </td>
+                    <td>
+                        <input class="margen-derecho" list="destino" placeholder="&#x1f6ec AEP Aeroparque">
+                        <datalist id="destino">
+                            <option value="&#x1f6ec COR Cordoba">&#x1f6ec COR Cordoba</option>
+                            <option value="&#x1f6ec AEP Aeroparque">&#x1f6ec AEP Aeroparque</option>
+                            <option value="&#x1f6ec EZE Ezeiza">&#x1f6ec EZE Ezeiza</option>
+                            <option value="&#x1f6ec SCL Santiago de Chile">&#x1f6ec SCL Santiago de Chile</option>
+                            <option value="&#x1f6ec MDZ Mendoza">&#x1f6ec MDZ Mendoza</option>
+                            <option value="&#x1f6ec LIM Lima">&#x1f6ec LIM Lima</option>
+                        </datalist>
+                    </td>
+                    <td>
+                        <input type="date" placeholder="ida">
+                    </td>
+                    <td>
+                        <input type="date" class="margen-derecho" placeholder="vuelta">
+                    </td>
+                    <td>
+                        <select class="margen-derecho" name="pasajeros" id="pasajeros">
+                            <option value="1-turista">1 persona, Turista</option>
+                            <option value="2-turista">2 personas, Turista</option>
+                            <option value="3-turista">3 personas, Turista</option>
+                            <option value="4-turista">4 personas, Turista</option>
+                            <option value="otro">Mas opciones...</option>
+                        </select>
+                    </td>
+                    <td>
+                        <button>&#x1f50d BUSCAR</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td colspan="2">
+                        <input type="checkbox" name="fechas" class="check">
+                        <label for="fechas">Todavía no he decidido la fecha </label>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+
+    <script src="" async defer></script>
+</body>
+
+</html>

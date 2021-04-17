@@ -1,0 +1,25 @@
+.normal {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    color: blue;
+    background-color: white;
+    text-align: left;
+}
+
+.destacado {
+    font-family:Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    color: red;
+    background-color: yellow;
+    text-align: center;
+}
+
+.comentario {
+    font-family:'Times New Roman', Times, serif;
+    font-size: 14px;
+    font-style: italic;
+    color: green;
+    background-color: white;
+    text-align: right;
+}

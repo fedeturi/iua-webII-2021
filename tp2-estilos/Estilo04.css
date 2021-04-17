@@ -1,0 +1,48 @@
+* {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  font-weight: bold;
+}
+
+#titulo {
+  background-color: rgb(245, 245, 149);
+  color: blue;
+  border: 3px black;
+  border-style: double;
+  font-weight: bold;
+  text-align: center;
+}
+
+#bienb-blue {
+  color: rgb(30, 164, 247);
+}
+
+#bienb-red {
+  color: red;
+  font-style: italic;
+}
+
+#bienb-green {
+  color: green;
+  font-style: italic;
+  text-decoration: underline;
+}
+
+#aqui {
+  color: red;
+  font-style: italic;
+}
+
+#tvs {
+  border: 3px black;
+  border-style: solid;
+  font-style: italic;
+}
+
+#tvs th, #tvs thead {
+  color: white;
+  background-color: black;
+  border: none;
+}
+
+
