@@ -10,13 +10,126 @@
         <title></title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
+        <link rel="stylesheet" href="Estilo07.css">
     </head>
     <body>
         <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
         
+        <h1>
+            HOTEL PRINCIPE
+        </h1>
+        <h3>
+            Reserva de Habitaciones
+        </h3>
+        <div>
+            <form action="habitaciones.php">
+                <table>
+                    <tr>
+                        <td>
+                            Ingresa tu Apellido:
+                        </td>
+                        <td>
+                            <input type="text" name="surname">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Ingresa tu Nombre:
+                        </td>
+                        <td>
+                            <input type="text" name="name">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Ingresa tu Correo Electrónico:
+                        </td>
+                        <td>
+                            <input type="email" name="email">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2">
+                            Sexo:
+                        </td>
+                        <td>
+                            <input type="radio" name="sexo" checked>
+                            <label for="sexo">Masculino</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="radio" name="sexo">
+                            <label for="sexo">Femenino</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td >
+                            Seleccione la/s habitacion/es de tu preferencia
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="number" name="pasj" min="1" max="10">
+                        </td>
+                        <td>
+                            Cantidad de Pasajeros
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <select name="rooms" id="rooms">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                            </select>
+                        </td>
+                        <td>
+                            Cantidad de Habitaciones
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Fecha Desde
+                        </td>
+                        <td>
+                            <input type="date" name="date-from">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Fecha Hasta
+                        </td>
+                        <td>
+                            <input type="date" name="date-to">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Solicitudes Especiales
+                        </td>
+                        <td>
+                            <textarea name="solicitudes" id="colicitudes" cols="30" rows="10"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            
+                        </td>
+                        <td>
+                            <button>Enviar Datos</button>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
         
 
         <script src="" async defer></script>

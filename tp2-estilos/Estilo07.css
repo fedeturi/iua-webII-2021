@@ -1,0 +1,18 @@
+
+h1 {
+    color: blue;
+    text-align: right;
+}
+
+h3 {
+    color: blue;
+}
+
+body {
+    max-width: 50%;
+}
+
+form{
+    background-color:cornsilk;
+    border: 3px solid black;
+}
