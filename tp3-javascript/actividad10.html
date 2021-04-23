@@ -4,19 +4,74 @@
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
-    </head>
-    <body>
-        <!--[if lt IE 7]>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="">
+</head>
+
+<body>
+    <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-        
-        <script src="" async defer></script>
-    </body>
+
+    <style>
+        * {
+            font-family: sans-serif;
+        }
+
+        thead {
+            background-color:deepskyblue
+        }
+
+        #seno {
+            background-color: yellow;
+        }
+        #coseno {
+            background-color: orange;
+        }
+        #tan {
+            background-color: greenyellow;
+        }
+
+    </style>
+
+    <script>
+        function funcionesTrigonometricas(angulo) {
+
+            var complementario = 90 - angulo;
+            var sumplementario = 180 - angulo;
+            var angRad =  angulo * (Math.PI / 180)
+            var complRad =  complementario * (Math.PI / 180)
+            var suplRad =  sumplementario * (Math.PI / 180)
+
+            document.write('<table>');
+            document.write('<thead>');
+            document.write('<th>Función</th><th>Angulo</th><th>Complementario</th><th>Suplementario</th>');
+            document.write('</thead>');
+            document.write('<tbody>');
+            document.write('<tr>');
+            document.write(`<td></td><td>${angulo}</td><td>${complementario}</td><td>${sumplementario}</td>`);
+            document.write('</tr>');
+            document.write('<tr id="seno">');
+            document.write(`<td>seno</td><td>${Math.sin(angRad)}</td><td>${Math.sin(complRad)}</td><td>${Math.sin(suplRad)}</td>`);
+            document.write('</tr>');
+            document.write('<tr id="coseno">');
+            document.write(`<td>coseno</td><td>${Math.cos(angRad)}</td><td>${Math.cos(complRad)}</td><td>${Math.cos(suplRad)}</td>`);
+            document.write('</tr>');
+            document.write('<tr id="tan">');
+            document.write(`<td>tangente</td><td>${Math.tan(angRad)}</td><td>${Math.tan(complRad)}</td><td>${Math.tan(suplRad)}</td>`);
+            document.write('</tr>');
+            document.write('</tbody>');
+            document.write('</table>');
+        }
+
+        funcionesTrigonometricas(50);
+    </script>
+</body>
+
 </html>

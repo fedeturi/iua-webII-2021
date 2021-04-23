@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="">
+</head>
+
+<style>
+    * {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+
+    table {
+        text-align: center;
+    }
+
+    thead {
+        background-color: lightblue;
+        font-weight: bold;
+    }
+
+    .promovido {
+        background-color: green;
+    }
+
+    .regulares {
+        background-color: yellow;
+    }
+
+    .libres {
+        background-color: red;
+    }
+</style>
+
+<body>
+    <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+    <script>
+        var curso = new Array()
+
+        for (i = 0; i < 5; i++) {
+            var alumno = new Array()
+
+            var nombre = prompt(`=== NUEVO ALUMNO ===\nNombre del ${i+1}º alumno:`, '');
+            var apellido = prompt(`=== NUEVO ALUMNO ===\nApellido de ${nombre}:`, '');
+            var nota1 = parseFloat(prompt(`=== ${nombre.toUpperCase()} ${apellido.toUpperCase()} ===\n1º nota:`, ''));
+            var nota2 = parseFloat(prompt(`=== ${nombre.toUpperCase()} ${apellido.toUpperCase()} ===\n2º nota:`, ''));
+            var nota3 = parseFloat(prompt(`=== ${nombre.toUpperCase()} ${apellido.toUpperCase()} ===\n3º nota:`, ''));
+
+            var promedio = (nota1 + nota2 + nota3) / 3;
+
+            alumno[0] = nombre;
+            alumno[1] = apellido;
+            alumno[2] = nota1;
+            alumno[3] = nota2;
+            alumno[4] = nota3;
+            alumno[5] = Math.trunc(promedio * 100) / 100;
+
+            curso[i] = alumno;
+
+        }
+
+        var orden = (prompt('METODO DE ORDENAMIENTO (A: Apellido  -  P: Promedio)')).toUpperCase()
+
+        switch (orden) {
+            case 'A':
+                var cursoOrdenado = curso.sort(function (a, b) {
+                return b[1] - a[1];});
+                break;
+            case 'P':
+                var cursoOrdenado = curso.sort(function (a, b) {
+                return b[5] - a[5];});
+                break;
+        }
+
+        document.write('<table>');
+        document.write('<thead>');
+        document.write(
+            '<th colspan="2">Alumno</th><th>Nota 1</th><th>Nota2</th><th>Nota3</th><th>Promedio</th><th>Condicion</th>'
+        );
+        document.write('</thead>');
+        document.write('<tbody>');
+
+        cursoOrdenado.forEach(function (element) {
+            document.write('<tr>');
+            document.write(
+                `<td>${element[0]}</td><td>${element[1]}</td><td>${element[2]}</td><td>${element[3]}</td><td>${element[4]}</td>`
+            );
+            console.log(element[5], element[5] >= 7, element[5] >= 4 && element[5] < 6.99, element[5] < 4)
+            if (element[5] >= 7) {
+                document.write(`<td class="promovido">${element[5]}</td><td class="promovido">PROMOVIDO</td>`);
+            } else if (element[5] >= 4 && element[5] < 6.99) {
+                document.write(`<td class="regulares">${element[5]}</td><td class="regulares">REGULAR</td>`);
+            } else {
+                document.write(`<td class="libres">${element[5]}</td><td class="libres">LIBRE</td>`);
+            }
+            document.write('</tr>');
+        });
+
+        document.write('</tbody>');
+        document.write('</table>');
+    </script>
+</body>
+
+</html>
