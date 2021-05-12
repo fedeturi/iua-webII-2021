@@ -24,48 +24,55 @@
       Registro de clientes y cuentas
     </div>
 
-    <form action="" class="mt-3">
+    <div action="" class="mt-3">
       <div class="row container-fluid">
         <label for="apellido" class="m-3 my-0 col bg-danger text-center text-white fs-4 rounded-3">Apellido</label>
-        <input id="apellido" name="apellido" type="text" class="m-3 my-0 col rounded-3 fs-4">
+        <input required id="apellido" minlength="3" name="apellido" type="text" class="m-3 my-0 col rounded-3 fs-4">
       </div>
       <div class="row container-fluid mt-3">
         <label for="dni" class="m-3 my-0 col bg-danger text-center text-white fs-4 rounded-3">DNI</label>
-        <input id="dni" name="dni" type="text" class="m-3 my-0 col rounded-3 fs-4">
+        <input required id="dni" name="dni" placeholder="formato 00.000.000" type="text"
+          class="m-3 my-0 col rounded-3 fs-4">
       </div>
       <div class="row container-fluid mt-3">
         <label for="ncuenta" class="m-3 my-0 col bg-danger text-center text-white fs-4 rounded-3">Nº Cuenta</label>
-        <input id="ncuenta" name="ncuenta" type="text" class="m-3 my-0 col rounded-3 fs-4">
+        <input required id="ncuenta" minlength="3" name="ncuenta" type="number" class="m-3 my-0 col rounded-3 fs-4">
       </div>
       <div class="row container-fluid mt-3">
         <label for="tipocuenta" class="m-3 my-0 col bg-danger text-center text-white fs-4 rounded-3">Tipo de
           Cuenta</label>
-        <select id="tipocuenta" name="tipocuenta" type="" class="m-3 my-0 col rounded-3 fs-4">
-          <option value="cc">Cuenta Corriente</option>
-          <option value="pf">Plazo Fijo</option>
-          <option value="fi">Fondos de Inversion</option>
-          <option value="ca">Caja de Ahorros</option>
+        <select required id="tipocuenta" name="tipocuenta" type="" class="m-3 my-0 col rounded-3 fs-4">
+          <option value="Cuenta Corriente">Cuenta Corriente</option>
+          <option value="Plazo Fijo">Plazo Fijo</option>
+          <option value="Fondo Inversion">Fondos de Inversion</option>
+          <option value="Caja Ahorro">Caja de Ahorros</option>
         </select>
       </div>
       <div class="row container-fluid mt-3">
         <label for="monto" class="m-3 my-0 col bg-danger text-center text-white fs-4 rounded-3">Monto a
           Depositar</label>
-        <input id="monto" name="monto" type="text" class="m-3 my-0 col rounded-3 fs-4">
+        <input required id="monto" min="1000" name="monto" type="number" class="m-3 my-0 col rounded-3 fs-4">
       </div>
       <div class="row container-fluid mt-3">
         <label for="dias" class="m-3 my-0 col bg-danger text-center text-white fs-4 rounded-3">Dias de Deposito</label>
-        <input id="dias" name="dias" type="text" class="m-3 my-0 col rounded-3 fs-4">
+        <input required id="dias" min="30" name="dias" type="number" class="m-3 my-0 col rounded-3 fs-4">
       </div>
       <br>
-      <button id="btn-registrar" class="btn-info col-12 rounded-3 text-white">Registrar Datos</button>
+      <button onclick="registrar()" id="btn-registrar" class="btn-info col-12 rounded-3 text-white">Registrar
+        Datos</button>
 
       <div class="row container-fluid mt-3">
         <label for="saldo" class="m-3 my-0 col bg-danger text-center text-white fs-4 rounded-3">La cuenta se registró
           correctamente <br>
           Al finalizar el período de su inversión obtendrá:</label>
-        <input id="saldo" name="saldo" type="text" class="m-3 my-0 col-3 rounded-3 fs-4">
+        <label id="saldo" name="saldo" type="text" class="m-3 my-0 col-3 rounded-3 fs-4"></label>
       </div>
-    </form>
+      <br>
+      <a href="./listado-clientes.html" target="_self">
+        <button id="btn-registrar" class="btn-info col-12 rounded-3 text-white text-center">Ver Listado
+          Completo</button>
+      </a>
+    </div>
   </div>
 
   <!-- Optional JavaScript; choose one of the two! -->
@@ -73,6 +80,87 @@
   <!-- Option 1: Bootstrap Bundle with Popper -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous">
+  </script>
+
+  <script>
+    function registrar() {
+      var apellido = document.getElementById('apellido').value;
+      var dni = document.getElementById('dni').value;
+      var ncuenta = document.getElementById('ncuenta').value;
+      var tipocuenta = document.getElementById('tipocuenta').value;
+      var monto = parseFloat(document.getElementById('monto').value);
+      var dias = parseInt(document.getElementById('dias').value);
+      var capitalText = document.getElementById('saldo')
+
+      console.log(apellido);
+      console.log(dni);
+      console.log(ncuenta);
+      console.log(tipocuenta);
+      console.log(monto);
+      console.log(dias);
+
+      var capital = 0;
+
+      var interes = 1;
+
+      var fondo = false;
+
+      if (tipocuenta === "Fondo Inversion") {
+        fondo = true;
+      }
+
+      if (fondo) {
+        if (dias < 90) {
+          console.log("No puede ser menos de 90 dias");
+          interes = 0;
+        } else if (dias > 90) {
+          console.log("6%");
+          interes = 6;
+          capital = monto + (monto * interes / 30) * dias;
+          capitalText.textContent = `$ ${capital}`;
+        } else {
+          console.log("5%");
+          interes = 5;
+          capital = monto + (monto * interes / 30) * dias;
+          capitalText.textContent = `$ ${capital}`;
+        }
+      } else {
+        if (monto >= 1000 && monto < 10000) {
+          console.log("2%");
+          interes = 2;
+          capital = monto + (monto * interes / 30) * dias;
+          capitalText.textContent = `$ ${capital}`;
+        } else if (monto >= 10000 && monto < 100000) {
+          console.log("3%");
+          interes = 3;
+          capital = monto + (monto * interes / 30) * dias;
+          capitalText.textContent = `$ ${capital}`;
+        } else if (monto > 100000) {
+          console.log("4%");
+          interes = 4;
+          capital = monto + (monto * interes / 30) * dias;
+          capitalText.textContent = `$ ${capital}`;
+        } else {
+          console.log("indefinido");
+          interes = 0;
+          capital = monto + (monto * interes / 30) * dias;
+          capitalText.textContent = `$ ${capital}`;
+        }
+
+      }
+
+      var cliente = {
+        'dni': dni,
+        'apellido': apellido,
+        'ncuenta': ncuenta,
+        'tcuenta': tipocuenta,
+        'monto': monto,
+        'dias': dias,
+        'capital': capital
+      };
+
+      localStorage.setItem(`${dni}`, cliente);
+    }
   </script>
 
   <!-- Option 2: Separate Popper and Bootstrap JS -->

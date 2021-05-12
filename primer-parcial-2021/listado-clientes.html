@@ -50,25 +50,11 @@
 
     <div class="row">
       <div class="mt-1 col rounded-3">
-        <button class="btn-close me-1"></button>
-        <button class="btn-outline-info  me-1 rounded-3">Editar</button>
-        <div class="text-center d-inline me-1">Apellido</div>
-      </div>
-      <div class="mt-1 col-2 text-center rounded-3 me-1">DNI</div>
-      <div class="mt-1 col-1 text-center rounded-3 me-1">11231</div>
-      <div class="mt-1 col-2 text-center rounded-3 me-1">Caja Ahorro</div>
-      <div class="mt-1 col-1 text-center rounded-3 me-1">$40343</div>
-      <div class="mt-1 col-1 text-center rounded-3 me-1">90</div>
-      <div class="mt-1 col-1 text-center rounded-3 me-1">$42000</div>
-    </div>
-
-    <div class="row">
-      <div class="mt-1 col rounded-3">
         <div class="mt-1 col bg-danger text-center text-white rounded-3 me-1">Totales acumulados:</div>
       </div>
-      <div class="mt-1 col-1 text-center rounded-3 me-1">$40343</div>
+      <div class="mt-1 col-1 text-center rounded-3 me-1">$</div>
       <div class="mt-1 col-1 text-center rounded-3 me-1"></div>
-      <div class="mt-1 col-1 text-center rounded-3 me-1">$42000</div>
+      <div class="mt-1 col-1 text-center rounded-3 me-1">$</div>
     </div>
 
   </div>
@@ -78,6 +64,31 @@
   <!-- Option 1: Bootstrap Bundle with Popper -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous">
+  </script>
+
+  <script>
+
+    Object.keys(localStorage).forEach(function (key) {
+      console.log(localStorage.getItem(key));
+      var append = `
+        <div class="row">
+          <div class="mt-1 col rounded-3">
+            <button class="btn-close me-1"></button>
+            <button class="btn-outline-info  me-1 rounded-3">Editar</button>
+            <div class="text-center d-inline me-1">${localStorage.getItem(key)}</div>
+          </div>
+          <div class="mt-1 col-2 text-center rounded-3 me-1">DNI</div>
+          <div class="mt-1 col-1 text-center rounded-3 me-1">11231</div>
+          <div class="mt-1 col-2 text-center rounded-3 me-1">Caja Ahorro</div>
+          <div class="mt-1 col-1 text-center rounded-3 me-1">$40343</div>
+          <div class="mt-1 col-1 text-center rounded-3 me-1">90</div>
+          <div class="mt-1 col-1 text-center rounded-3 me-1">$42000</div>
+        </div>
+      `;
+
+      console.log(append);
+    });
+
   </script>
 
   <!-- Option 2: Separate Popper and Bootstrap JS -->
