@@ -20,8 +20,9 @@
       BANCO INTERNACIONAL - Impulsando el Progreso de la Región
     </div>
 
-    <div class="fs-3 mt-3">
+    <div class="fs-3 mt-3 d-flex justify-content-between">
       Listado de Clientes y Cuentas Registradas
+      <button id="btn-registrar" onclick="buscar()" class="btn-info rounded-3 text-white text-center">Buscar</button>
     </div>
 
     <div class="row">
@@ -42,9 +43,9 @@
       <div class="mt-1 col rounded-3">
         <div class="mt-1 col bg-danger text-center text-white rounded-3 me-1">Totales acumulados:</div>
       </div>
-      <div class="mt-1 col-1 text-center rounded-3 me-1">$</div>
+      <div id="total-depositos" class="mt-1 col-1 text-center rounded-3 me-1"></div>
       <div class="mt-1 col-1 text-center rounded-3 me-1"></div>
-      <div class="mt-1 col-1 text-center rounded-3 me-1">$</div>
+      <div id="total-capitales" class="mt-1 col-1 text-center rounded-3 me-1"></div>
     </div>
 
   </div>
@@ -58,14 +59,22 @@
 
   <script>
     var listadoDiv = document.getElementById('listado');
+    var totalDivDepositos = document.getElementById('total-depositos');
+    var totalDivCapitales = document.getElementById('total-capitales');
 
     var clientes = Object.keys(sessionStorage)
     console.log(clientes);
+
+    var totalDepositos = 0;
+    var totalCapitales = 0;
 
     for (let index = 0; index < clientes.length; index++) {
       var cliente = sessionStorage[clientes[index]];
 
       console.log(cliente);
+
+      totalDepositos += parseFloat(cliente.split(',')[4]);
+      totalCapitales += parseFloat(cliente.split(',')[6]);
 
       var append = `
         <div class="row" id="${clientes[index]}">
@@ -84,6 +93,9 @@
       `;
 
       listadoDiv.innerHTML += append;
+      totalDivDepositos.innerHTML = `$${totalDepositos} `;
+      totalDivCapitales.innerHTML = `$${totalCapitales} `;
+
 
 
     }
@@ -92,6 +104,28 @@
       var div = document.getElementById(id);
       div.remove()
     };
+
+    function buscar(){
+
+      var dni = prompt('Buscar por DNI');
+      
+      if (clientes.includes(dni)) {
+        var datos = `
+        DNI: ${cliente.split(',')[1]}
+        APELLIDO: ${cliente.split(',')[0]}
+        Nº Cuenta: ${cliente.split(',')[2]}
+        Tipo Cuenta: ${cliente.split(',')[3]}
+        Monto Inicial: $${cliente.split(',')[4]}
+        Dias: ${cliente.split(',')[5]}
+        Capital: $${cliente.split(',')[6]}
+        `;
+
+        alert(datos);
+      } else {
+        alert("Cliente no registrado")
+      }
+
+    }
   </script>
 
   <!-- Option 2: Separate Popper and Bootstrap JS -->
