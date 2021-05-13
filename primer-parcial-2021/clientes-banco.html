@@ -149,17 +149,9 @@
 
       }
 
-      var cliente = {
-        'dni': dni,
-        'apellido': apellido,
-        'ncuenta': ncuenta,
-        'tcuenta': tipocuenta,
-        'monto': monto,
-        'dias': dias,
-        'capital': capital
-      };
+      let cliente = [dni, apellido, ncuenta, tipocuenta, monto, dias, capital];
 
-      localStorage.setItem(`${dni}`, cliente);
+      sessionStorage.setItem(`${dni}`, cliente);
     }
   </script>
 
