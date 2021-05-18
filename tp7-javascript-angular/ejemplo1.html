@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+
+<head>
+    <title>Controladores en Angular</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"> </script>
+</head>
+
+<body>
+    <h2>EjemplodeTablasenAngular</h2>
+    <div ng-app="mainApp" ng-controller="ControladorEstudiante">
+        <table border="0">
+            <tr>
+                <td>Ingresa el Nombre:</td>
+                <td>
+                    <input type="text" ng-model="Estudiante.Nombre">
+                </td>
+            </tr>
+            <tr>
+                <td>IngresaelApellido:</td>
+                <td>
+                    <input type="text" ng-model="Estudiante.Apellido">
+                </td>
+            </tr>
+            <tr>
+                <td>Name:</td>
+                <td>{{Estudiante.NombreCompleto()}}</td>
+            </tr>
+            <tr>
+                <td>Materia:</td>
+                <td>
+                    <table>
+                        <tr>
+                            <th>Nombre</th>.<th>Notas</th>
+                        </tr>
+                        <tr ng-repeat="materia in Estudiante.Materias">
+                            <td>{{materia.Nombre}}</td>
+                            <td>{{materia.Nota}}</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+        <input type="checkbox" ng-model="enableDisableButton">Disable Button</input>
+        <button ng-disabled="enableDisableButton">Click Me!</button>
+    </div>
+    <script>
+        var mainApp = angular.module("mainApp", []);
+        mainApp.controller('ControladorEstudiante', function ($scope) {
+            $scope.Estudiante = {
+                Nombre: "Carlos",
+                Apellido: "Simes",
+                CostoMatricula: 1350,
+                Materias: [{
+                    Nombre: 'Fisica',
+                    Nota: 7
+                }, {
+                    Nombre: 'Quimica',
+                    Nota: 8
+                }, {
+                    Nombre: 'Matemática',
+                    Nota: 6.5
+                }, {
+                    Nombre: 'Informática',
+                    Nota: 9.5
+                }, {
+                    Nombre: 'Basesdedatos',
+                    Nota: 8
+                }],
+                NombreCompleto: function () {
+                    var ObjetoEstudiante;
+                    ObjetoEstudiante = $scope.Estudiante;
+                    return ObjetoEstudiante.Nombre + "" + ObjetoEstudiante.Apellido;
+                }
+            };
+        });
+    </script>
+</body>
+
+</html>
