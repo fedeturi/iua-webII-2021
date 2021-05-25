@@ -90,7 +90,7 @@
       var tipocuenta = document.getElementById('tipocuenta').value;
       var monto = parseFloat(document.getElementById('monto').value);
       var dias = parseInt(document.getElementById('dias').value);
-      var capitalText = document.getElementById('saldo')
+      var capitalText = document.getElementById('saldo');
 
       console.log(apellido);
       console.log(dni);
@@ -132,10 +132,11 @@
           capitalText.textContent = `$ ${capital}`;
         } else if (monto >= 10000 && monto < 100000) {
           console.log("3%");
-          interes = 3;
+          interes = 0.03;
           capital = monto + (monto * interes / 30) * dias;
+          console.log(capital);
           capitalText.textContent = `$ ${capital}`;
-        } else if (monto > 100000) {
+        } else if (monto >= 100000 && monto < 1000000) {
           console.log("4%");
           interes = 4;
           capital = monto + (monto * interes / 30) * dias;

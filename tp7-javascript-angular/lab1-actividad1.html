@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"> </script>
+</head>
+
+<body>
+    <h2>Actividad 1: Validador de Edad</h2>
+    <p>Construye una aplicación Angular que sea capaz de ingresar los datos de una persona(Apellido,Nombre, Edad ) y que
+        muestre esos datos indicando si la persona es menor de edad (edad <18), mayor de edad (edad>=18) o adulto mayor
+            (edad >=65)</p>
+    <div ng-app="App" ng-controller="controllerPerson">Nombre:
+        <input type="text" ng-model="Person.Nombre">
+        <br><br>Apellido:<input type="text" ng-model="Person.Apellido">
+        <br><br>Edad:<input type="text" ng-model="Person.Edad">
+        <br><br>{{Person.ValidarEdad()}}</div>
+    <script>
+        var App = angular.module("App", []);
+        App.controller('controllerPerson', function ($scope) {
+            $scope.Person = {
+                Nombre: "Carlos",
+                Apellido: "Simes",
+                Edad: 24,
+                ValidarEdad: function () {
+                    var objetoPersona;
+                    objetoPersona = $scope.Person;
+
+                    var age = parseInt(objetoPersona.Edad)
+
+                    if (age < 18) {
+                        return `${objetoPersona.Nombre} ${objetoPersona.Apellido} tiene ${objetoPersona.Edad} por lo que es MENOR DE EDAD`;
+                    } else if (age >= 18 && age < 65) {
+                        return `${objetoPersona.Nombre} ${objetoPersona.Apellido} tiene ${objetoPersona.Edad} por lo que es MAYOR DE EDAD`;
+                    } else if (age >= 65) {
+                        return `${objetoPersona.Nombre} ${objetoPersona.Apellido} tiene ${objetoPersona.Edad} por lo que es ADULTO MAYOR`;
+                    }
+
+
+                }
+            };
+        });
+    </script>
+</body>
+
+</html>

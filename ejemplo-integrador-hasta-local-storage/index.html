@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script src="angular.min.js"></script>
+	<link rel="stylesheet" href="bootstrap.min.css">
+	<meta charset="utf-8">
+	<!--Incluimos nuestros archivos de estilos y el de funciones javascript-->
+	<link rel="stylesheet" type="text/css" href="estilos.css">
+	<script type="text/javascript" src="funciones.js"></script>
+</head>
+<body ng-app="App" class="body">
+	<div class="container" ng-controller="control">
+		<div class="row verde">
+			<h1 class="col-12">Registro de Alumnos - Cálculo del IMC</h1>
+            <h3 class="col-12">Ejemplo Completo Usando HTML - CSS - JS - ANGULAR JS Y LOCALSTORAGE</h3>
+			<label class="col-2">Apellido:</label>
+			<input type="text" ng-model="apellido" class="col-10" placeholder="Ingrese el Apellido">
+			<label class="col-2">Legajo:</label>
+			<input type="text" ng-model="legajo" class="col-10" placeholder="Ingrese el Legajo">
+
+			<label class="col-2">Sexo:</label>
+			<select class="col-10" ng-model="sexo">
+				<option value="">Seleccione el Sexo</option>
+				<option value="Masculino">Masculino</option>
+				<option value="Femenino">Femenino</option>
+			</select>
+
+			<label class="col-2">Peso en Kg:</label>
+			<div class="col-10">
+				<div class="row">
+					<input type="text" ng-model="peso" class="col-12" placeholder="Ingrese el Peso en Kg">	
+				</div>
+			</div>
+
+			<label class="col-2">Ingrese la altura en CM:</label>
+			<div class="col-10">
+				<div class="row">
+					<input type="text" ng-model="altura" class="col-12" placeholder="Ingrese la Altura en CM">	
+				</div>
+			</div>			
+
+			<div class="col-2"></div>
+			<input type="button" value="Registrar Alumno" ng-click="registrarAlumno();" class="btn btn-primary">
+			<input type="button" value="Borrar Almacenamiento Local" ng-click="borrarLocalStorage();" class="btn btn-danger" style="margin: auto">
+		</div>
+
+		<br>
+
+		<div class="table-responsive">
+			<h2>Registro de Alumnos - Indice de Masa Corporal</h2>
+			<table class="table">
+				<thead>
+					<th>Apellido</th>
+					<th>Legajo</th>
+					<th>Peso</th>
+					<th>Altura</th>
+					<th>Sexo</th>
+					<th>Indice Masa Corporal</th>
+					<th></th>
+					<th></th>
+				</thead>
+
+				 <!-- USAMOS UNA DIRECTIVA NG-REPEAT PARA CREAR LA TABLA- EL TRACK BY GENERA IDENTIFICADORES INTERNOS ASOCIADOS A CADA REGISTRO-->
+				 <!-- ESTO SIRVE PARA OPTIMIZAR EL RENDIMIENTO, YA QUE CUANDO OCURRA UN CAMBIO EN EL REGISTRO, POR EJ PORQUE LO EDITAMOS, ANGULAR EN VEZ DE -->
+				 <!-- RECREAR TODA LA TABLA, SOLO RENDERIZA EL ELEMENTO MODIFICADO LO QUE MEJORA MUCHISIMO LA PERFORMANCE-->
+				 
+				<tr ng-repeat="alumno in alumnos track by $index" ng-class="getColorTabla(alumno.imc);">
+					<td>{{ alumno.apellido }}</td>
+					<td>{{ alumno.legajo }}</td>
+					<td>{{ alumno.peso }}</td>
+					<td>{{ alumno.altura }}</td>
+					<td>{{ alumno.sexo }}</td>
+					<td>{{ alumno.imc }}</td>
+					<td><input type="button" value="Editar" ng-click="editar($index);" class="btn btn-primary"></td>
+					<td><input type="button" value="Eliminar" class="btn btn-danger" ng-click="borrar($index);"></td>
+				</tr>
+
+				<thead>
+					<th>Alumnos con Sobrepeso / Obesidad</th>
+					<th></th>
+					<th></th>
+					<th></th>
+					<th></th>
+					<th>{{ getSobrepeso() }}</th>
+					<th></th>
+					<th></th>
+				</thead>
+			</table>
+		</div>
+
+		<!-- Aqui empieza el código del pop up que basicamente es un div que aparece y desaparece cuando es necesario-->
+		<!-- Se agregaron algunas animaciones básicas para mejorar el diseño, pero no son imprescindibles-->
+		<!-- Los estilos y las funciones para el popup se encuentran en estilos.css y funciones.js respectivamente-->
+
+		<div class="oculto" id="popup">
+			<div class="row">
+				<h1 class="col-12">Editar Alumno</h1>
+			</div>
+			
+			<div class="row">
+				<label class="col-2">Apellido:</label>
+				<input type="text" ng-model="editApellido" class="col-10" placeholder="Ingreso de Apellido">
+			</div>
+
+			<div class="row">
+				<label class="col-2">Legajo:</label>
+				<input type="text" ng-model="editLegajo" class="col-10" placeholder="Ingreso de Legajo">
+			</div>
+
+			<div class="row">
+				<label class="col-2">Sexo:</label>
+				<select class="col-10" ng-model="editSexo">
+					<option value="">Seleccione el Sexo</option>
+					<option value="Masculino">Masculino</option>
+					<option value="Femenino">Femenino</option>
+				</select>
+			</div>
+			
+			<div class="row">
+				<label class="col-2">Peso:</label>
+				<input type="text" ng-model="editPeso" class="col-10" placeholder="Ingreso de Peso">
+			</div>
+
+			<div class="row">
+				<label class="col-2">Altura:</label>
+				<input type="text" ng-model="editAltura" class="col-10" placeholder="Ingreso de Altura">
+			</div>
+
+			<div class="row">
+				<div class="col-2"></div>
+				<input type="button" value="Cancelar" onclick="cerrarPopup();" class="btn btn-danger">
+				<input type="button" value="Guardar" ng-click="guardar();" class="btn btn-success" style="margin-left: 10px;">		
+			</div>	
+		</div>
+	</div>
+	<!-- incluimos el archivo del controler de nuestra app-->
+	<script type="text/javascript" src="controler.js"></script>
+</body>
+</html>

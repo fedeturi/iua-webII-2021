@@ -1,0 +1,74 @@
+.body{
+	background-color: whitesmoke;
+}
+.container{
+	margin-top: 20px;
+}
+.oculto {
+	visibility: hidden;
+}
+
+.verde {
+	background-color: rgba(100,255,100,0.5);
+	padding: 20px;
+}
+
+.rojoTabla{
+	background-color: rgba(255,100,100,0.4);
+}
+
+.verdeTabla{
+	background-color: rgba(100,255,100,0.4);
+}
+
+.amarilloTabla{
+	background-color: rgba(255,255,100,0.4);
+}
+
+.btn {
+	font-size: 20px;
+}
+
+.popup {
+	position: fixed;
+	right: 100px;
+	left: 100px;
+	top: 100px;
+	bottom: 100px;
+	box-shadow: 0px 0px 600px 600px rgba(0,0,0,0.5);
+	z-index: 1;
+	background-color: white;
+	padding: 50px;
+	overflow: auto;
+}
+
+.popup * {
+	padding: 5px;
+}
+
+ /* Algunas clases para hacer un poco de animacion css pueden obviarse */
+
+.mostrarPopup {
+	animation-duration: 0.5s;
+	animation-fill-mode: forwards;
+	animation-name: fadeIn;
+	opacity: 0;
+}	
+
+
+.ocultarPopup {
+	animation-duration: 0.5s;
+	animation-fill-mode: forwards;
+	animation-name: fadeOut;
+	opacity: 1;
+}	
+
+@keyframes fadeIn {
+	from {opacity: 0;}
+	to {opacity: 1;}
+}
+
+@keyframes fadeOut {
+	from {opacity: 1;}
+	to {opacity: 0; visibility: hidden;}
+}
