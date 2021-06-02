@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prueba de nuestro Web Server</title>
+</head>
+
+<body>
+    <div>
+        <h2>Probando la funcion Hola de nuestro Web Server con Formularios ...</h2>
+        <form action="http://localhost:5000/Hola" method="get">
+            Ingresa tu Nombre <input type="text" name="nombre" id=""><br>
+            <input type="submit" value="Saludar">
+        </form>
+    </div>
+    <div>
+        <h2>Probando la funcion Sumar de nuestro Web Server con Formularios ...</h2>
+        <form action="http://localhost:5000/Sumar" method="get">
+            Ingresa el Primer Numero <input type="number" name="num1" id=""><br>
+            Ingresa el Segundo Numero <input type="number" name="num2" id=""><br>
+            <input type="submit" value="Sumar">
+        </form>
+    </div>
+</body>
+
+<ul>
+    <li>Saludar: http://localhost:5000/Hola/nombre</li>
+    <li>Sumar: http://localhost:5000/Sumar/num1=xxx&num2=yyy</li>
+    <li>Tabla multiplicar numero X: </li>
+    <li>Login usuario:</li>
+    <li>Registro de nuevos ususarios:</li>
+</ul>
+
+</html>
