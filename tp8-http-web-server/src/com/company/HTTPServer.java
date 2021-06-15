@@ -71,9 +71,9 @@ public class HTTPServer extends Thread {
                     homePage();
                 } else if (httpQueryString.startsWith("/Hola")) {
                     /* vamos a la página Hola */
-                    HolaPage(
-                            httpQueryString.substring(httpQueryString.lastIndexOf('/') + 1,
-                                    httpQueryString.length()));
+                    String[] queryString = httpQueryString.split("=");
+                    String name = queryString[queryString.length - 1];
+                    HolaPage(name);
                 } else if (httpQueryString.startsWith("/Sumar")) {
                     String Parametro = httpQueryString.substring(httpQueryString.lastIndexOf('/') + 2,
                             httpQueryString.length());
@@ -114,6 +114,13 @@ public class HTTPServer extends Thread {
                     }
                     float resultado = num1 / num2;
                     DividirPage(resultado);
+                } else if (httpQueryString.startsWith("/Tabla")) {
+                    String Parametro = httpQueryString.substring(httpQueryString.lastIndexOf('/') + 2,
+                            httpQueryString.length());
+                    String[] Parametros = Parametro.split("&");
+                    // parametros es un array que contiene num1= xx , num2= yy
+                    float num1 = Float.parseFloat(Parametros[0].substring(Parametros[0].indexOf("=") + 1));
+                    TablaPage(num1);
                 } else {
                     sendResponse(404, "<b>El Recurso solicitado no se encuentra disponible</b>");
                 }
@@ -158,12 +165,12 @@ public class HTTPServer extends Thread {
         responseBuffer.append("<p>El servidor permite realizar diferentes acciones usando<br>" +
                 "el método HTTP GET. Vea la siguiente lista de endpoints posibles:</p>");
         responseBuffer.append("<ul>\n" +
-                "    <li>Saludar: http://localhost:5000/Hola/nombre</li>\n" +
-                "    <li>Sumar: http://localhost:5000/Sumar/num1=xxx&num2=yyy</li>\n" +
-                "    <li>Restar: http://localhost:5000/Restar/num1=xxx&num2=yyy</li>\n" +
-                "    <li>Multiplicar: http://localhost:5000/Multiplicar/num1=xxx&num2=yyy</li>\n" +
-                "    <li>Dividir: http://localhost:5000/Dividir/num1=xxx&num2=yyy</li>\n" +
-                "    <li>Tabla numero X: </li>\n" +
+                "    <li>Saludar: http://localhost:5000/Hola?nombre=nombre</li>\n" +
+                "    <li>Sumar: http://localhost:5000/Sumar?num1=xxx&num2=yyy</li>\n" +
+                "    <li>Restar: http://localhost:5000/Restar?num1=xxx&num2=yyy</li>\n" +
+                "    <li>Multiplicar: http://localhost:5000/Multiplicar?num1=xxx&num2=yyy</li>\n" +
+                "    <li>Dividir: http://localhost:5000/Dividir?num1=xxx&num2=yyy</li>\n" +
+                "    <li>Tabla numero X: http://localhost:5000/Tabla?num1=xxx</li>\n" +
                 "    <li>Login usuario:</li>\n" +
                 "    <li>Registro de nuevos ususarios:</li>\n" +
                 "</ul>");
@@ -208,6 +215,17 @@ public class HTTPServer extends Thread {
                 "width: 80%; margin: auto}</style>");
         responseBuffer.append("<h2> El Resultado de la Division es: ").append(String.valueOf(valor)).append("</h2><BR>");
         sendResponse(200, responseBuffer.toString());
+    }
+
+    public void TablaPage(float valor) throws Exception {
+        StringBuffer responseBuffer = new StringBuffer();
+        responseBuffer.append("<h2>Tabla de multiplicación</h2>");
+
+        for (int i = 0; i <= 12; i++){
+            String sf1 = String.format("%d x %d = %d",(int) valor, i, (int) valor * i);
+            responseBuffer.append("<p>").append(sf1).append("</p>");
+
+        }sendResponse(200, responseBuffer.toString());
     }
 
     // constantes del protocolo HTTP

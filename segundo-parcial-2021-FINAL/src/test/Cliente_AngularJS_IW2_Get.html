@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html lang="en" ng-app="adminPanel">
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/c
+	ss/
+	bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/
+	popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/
+	bootstrap.min.js"></script>
+    <title> Cliente Angular JS de la Librería - Solicitud Get </title>
+</head>
+
+<body>
+    <div class="container col-md-12" style="background-color: honeydew">
+        <h2 align="center"> Sistema de Gestión de Cuentas Bancarias - Solicitud Get </h2>
+    </div>
+    <div class="container col-md-8 col-md-offset-2" ng-controller="accountsController">
+        <table class="table table-striped  table-hover table-responsive">
+            <th colspan="4" align="center">Listado de Cuentas</th>
+            <tr>
+                <td> ID LIBRO </td>
+                <td> TITULO</td>
+                <td> AUTOR </td>
+                <td> PRECIO </td>
+            </tr>
+            <tr ng-repeat="account in accounts">
+                <td>{{account.dni}}</td>
+                <td>{{account.surname}}</td>
+                <td>{{account.accountNumber}}</td>
+                <td>{{account.accountType}}</td>
+                <td>{{account.startingCapital}}</td>
+                <td>{{account.days}}</td>
+                <td>{{account.endingCapital}}</td>
+            </tr>
+        </table>
+    </div>
+
+    <script>
+        var app = angular.module('adminPanel', []);
+        app.controller('accountsController', function ($scope, $http) {
+
+            $http.get("http://localhost:8866/Listar")
+
+                .then(function (response) { $scope.accounts = response.data; });
+        });
+    </script>
+
+</body>
+</html>
