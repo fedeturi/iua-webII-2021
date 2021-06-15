@@ -44,8 +44,8 @@
         <select required id="tipocuenta" name="tipocuenta" type="" class="m-3 my-0 col rounded-3 fs-4">
           <option value="Cuenta Corriente">Cuenta Corriente</option>
           <option value="Plazo Fijo">Plazo Fijo</option>
-          <option value="Fondo Inversion">Fondos de Inversion</option>
-          <option value="Caja Ahorro">Caja de Ahorros</option>
+          <option value="Fondo Inversion">Fondo Inversion</option>
+          <option value="Caja Ahorro">Caja Ahorro</option>
         </select>
       </div>
       <div class="row container-fluid mt-3">
@@ -85,74 +85,88 @@
   <script>
     function registrar() {
       var apellido = document.getElementById('apellido').value;
-      var dni = document.getElementById('dni').value;
+      var dni = parseInt(document.getElementById('dni').value);
       var ncuenta = document.getElementById('ncuenta').value;
       var tipocuenta = document.getElementById('tipocuenta').value;
       var monto = parseFloat(document.getElementById('monto').value);
       var dias = parseInt(document.getElementById('dias').value);
       var capitalText = document.getElementById('saldo');
 
-      console.log(apellido);
-      console.log(dni);
-      console.log(ncuenta);
-      console.log(tipocuenta);
-      console.log(monto);
-      console.log(dias);
-
-      var capital = 0;
-
-      var interes = 1;
-
       var fondo = false;
+      var typeAcc = ""
 
       if (tipocuenta === "Fondo Inversion") {
         fondo = true;
+        typeAcc = "FI";
+      } else if (tipocuenta === "Cuenta Corriente") {
+        typeAcc = "CA";
+      } else if (tipocuenta === "Caja Ahorro") {
+        typeAcc = "CA";
+      } else if (tipocuenta === "Plazo Fijo") {
+        typeAcc = "PF";
       }
+
+      var capital = 0;
+
+      var interes = 0;
 
       if (fondo) {
         if (dias < 90) {
           console.log("No puede ser menos de 90 dias");
           interes = 0;
+          alert("Las suscripciones a Fondos de Inversion no pueden tener una duración menor a 90")
         } else if (dias > 90) {
-          console.log("6%");
-          interes = 6;
-          capital = monto + (monto * interes / 30) * dias;
-          capitalText.textContent = `$ ${capital}`;
-        } else {
           console.log("5%");
-          interes = 5;
-          capital = monto + (monto * interes / 30) * dias;
-          capitalText.textContent = `$ ${capital}`;
+          interes = 0.05;
         }
       } else {
+
+        if (dias > 90) {
+          interes += 0.01;
+        }
+
         if (monto >= 1000 && monto < 10000) {
           console.log("2%");
-          interes = 2;
-          capital = monto + (monto * interes / 30) * dias;
-          capitalText.textContent = `$ ${capital}`;
+          interes += 0.02;
         } else if (monto >= 10000 && monto < 100000) {
           console.log("3%");
-          interes = 0.03;
-          capital = monto + (monto * interes / 30) * dias;
-          console.log(capital);
-          capitalText.textContent = `$ ${capital}`;
+          interes += 0.03;
         } else if (monto >= 100000 && monto < 1000000) {
           console.log("4%");
-          interes = 4;
-          capital = monto + (monto * interes / 30) * dias;
-          capitalText.textContent = `$ ${capital}`;
+          interes += 0.04;
         } else {
           console.log("indefinido");
           interes = 0;
-          capital = monto + (monto * interes / 30) * dias;
-          capitalText.textContent = `$ ${capital}`;
         }
 
       }
 
-      let cliente = [dni, apellido, ncuenta, tipocuenta, monto, dias, capital];
+      if (interes > 0) {
+        capital = monto + (monto * interes / 30) * dias;
+        capitalText.textContent = `$ ${capital}`;
+        crear(dni, apellido, ncuenta, typeAcc, monto, dias, capital)
+      } else {
+        capital = monto + (monto * interes / 30) * dias;
+        capitalText.textContent = `$ ${capital}`;
+      }
 
-      sessionStorage.setItem(`${dni}`, cliente);
+      console.log(apellido);
+      console.log(dni);
+      console.log(ncuenta);
+      console.log(typeAcc);
+      console.log(interes)
+      console.log(monto);
+      console.log(dias);
+    }
+
+    function crear(dni, apellido, nroCuenta, tipoCuenta, monto, dias, capital){
+      const url = `http://localhost:8866/Agregar/?dni=${dni}&apellido=${apellido}&nroCuenta=${nroCuenta}&tipoCuenta=${tipoCuenta}&monto=${monto}&dias=${dias}&capital=${capital}`;
+
+      fetch(url)
+        .then(data => {
+          return data.json()
+        })
+        alert("Cliente Registrado");
     }
   </script>
 

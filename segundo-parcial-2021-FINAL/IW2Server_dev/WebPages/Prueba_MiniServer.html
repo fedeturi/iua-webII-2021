@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Cliente REST en Angular</title>
+<style>
+body{ font-family: sans-serif;}
+li{
+font-size: 0.8em;
+}
+li span{
+font-weight: bold;
+}
+</style>
+</head>
+<body>
+<div ng-app="apiApp" ng-controller="apiAppCtrl as vm">
+<h1>Cliente REST en Angular</h1>
+<p>
+Selecciona:
+<select ng-model="vm.url" ng-change="vm.resolver()">
+<option value="http://localhost:8866/Listar">Listado de Libros</option>
+
+</select>
+</p>
+<p>
+{{vm.respuesta}}
+</p>
+
+
+
+
+
+
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.24/angular.min.js"></script>
+<script>
+angular
+.module('apiApp', [])
+.controller('apiAppCtrl', ['$http', controladorPrincipal]);
+function controladorPrincipal($http){
+var vm=this;
+vm.resolver = function(){
+$http.get(vm.url).success(function(respuesta){
+vm.respuesta=respuesta;
+// vm.Libros = respuesta;
+});
+}
+}
+</script>
+</body>
+</html>

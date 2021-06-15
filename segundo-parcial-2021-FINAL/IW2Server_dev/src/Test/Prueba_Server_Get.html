@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Cliente Web en Angular</title>
+    <style>
+        body {
+            font-family: sans-serif;
+        }
+
+        li {
+            font-size: 0.8em;
+        }
+
+        li span {
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div ng-app="apiApp" ng-controller="apiAppCtrl as vm">
+        <h1>Cliente para el Servidor IW2 - Solicitud Get</h1>
+        <p>
+            Selecciona:
+            <select ng-model="vm.url" ng-change="vm.resolver()">
+                <option value="http://localhost:8866/Listar">Listado de Libros</option>
+            </select>
+        </p>
+        <table border=2>
+            <thead>
+                <td>Titulo</td>
+                <td> Autor </td>
+            </thead>
+            <tr ng-repeat="libro in vm.Libros">
+                <td>{{libro.titulo}}</td>
+                <td>
+                    {{libro.autor}}</td>
+        </table>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.24/angular.min.js"></script>
+    <script>
+        angular
+            .module('apiApp', [])
+            .controller('apiAppCtrl', ['$http', controladorPrincipal]);
+        function controladorPrincipal($http) {
+            var vm = this;
+            vm.resolver = function () {
+                $http.get(vm.url).success(function (respuesta) {
+                    vm.Libros = respuesta;
+                });
+            }
+
+        }
+    </script>
+</body>
+
+</html>

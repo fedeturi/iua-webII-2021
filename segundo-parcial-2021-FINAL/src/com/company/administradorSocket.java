@@ -181,6 +181,7 @@ public class administradorSocket extends Thread {
 
                             Gson gson = new Gson();
                             String listadoJSON = "[";
+                            listadoJSON += gson.toJson("True") + ",";
                             listadoJSON += gson.toJson(account) + ",";
 
                             listadoJSON = listadoJSON.substring(0, listadoJSON.length() - 1);
@@ -190,12 +191,49 @@ public class administradorSocket extends Thread {
                             resp.imprimirSalida(resp.getHeader());
                             resp.imprimirSalida(listadoJSON);
                         } else {
-                            PaginaInicio = resp.getInitPage("Revisar parámetros");
-                            resp.imprimirSalida(resp.getHeader());
-                            resp.imprimirSalida("Revisar parámetros");
-                            Sout("Revisar parámetros");
-                        }
+                            Gson gson = new Gson();
+                            String listadoJSON = "[";
+                            listadoJSON += gson.toJson("False") + ",";
+                            listadoJSON += gson.toJson("Revisar parámetros") + ",";
 
+                            listadoJSON = listadoJSON.substring(0, listadoJSON.length() - 1);
+                            listadoJSON += "]";
+
+                            PaginaInicio = resp.getInitPage(listadoJSON);
+                            resp.imprimirSalida(resp.getHeader());
+                            resp.imprimirSalida(listadoJSON);
+                        }
+                    } else if (hacer.equalsIgnoreCase("Borrar")) {
+
+                        String key = req.getValorParametro("dni");
+                        int keyInt = Integer.parseInt(key);
+
+                        System.out.println("dni: " + keyInt);
+
+                        AccountDTO account = new AccountDTO();
+                        AccountDAO accDAO = new AccountDAO();
+                        Boolean deleted = accDAO.delete(keyInt);
+
+                        if (deleted) {
+                            Gson gson = new Gson();
+                            String listadoJSON = "[";
+                            listadoJSON += gson.toJson("True") + ",";
+                            listadoJSON = listadoJSON.substring(0, listadoJSON.length() - 1);
+                            listadoJSON += "]";
+                            System.out.println(gson.toJson(account));
+                            PaginaInicio = resp.getInitPage(gson.toJson(account));
+                            resp.imprimirSalida(resp.getHeader());
+                            resp.imprimirSalida(listadoJSON);
+                        } else {
+                            Gson gson = new Gson();
+                            String listadoJSON = "[";
+                            listadoJSON += gson.toJson("False") + ",";
+                            listadoJSON = listadoJSON.substring(0, listadoJSON.length() - 1);
+                            listadoJSON += "]";
+                            PaginaInicio = resp.getInitPage(listadoJSON);
+                            resp.imprimirSalida(resp.getHeader());
+                            resp.imprimirSalida(listadoJSON);
+                        }
 
                     } else { // no piden ninguna accion enviamos un archivo, por defecto es index.html
                         if (req.getAccion().equals(" ")) // no pidieron nada enviamos pagina principal

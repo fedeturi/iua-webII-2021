@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+
+  <title>Ing. Web II | Primer Parcial Resuelto - BRUN</title>
+</head>
+
+<body>
+
+  <div class="container p-3 bg-light">
+    <div class="bg-danger text-center text-white fs-2 rounded-3">
+      BANCO INTERNACIONAL - Impulsando el Progreso de la Región
+    </div>
+
+    <div class="bg-danger text-center text-white fs-3 mt-3 rounded-3">
+      Registro de clientes y cuentas
+    </div>
+
+    <div action="" class="mt-3">
+      <div class="row container-fluid">
+        <label for="apellido" class="m-3 my-0 col bg-danger text-center text-white fs-4 rounded-3">Apellido</label>
+        <input required id="apellido" minlength="3" name="apellido" type="text" class="m-3 my-0 col rounded-3 fs-4">
+      </div>
+      <div class="row container-fluid mt-3">
+        <label for="dni" class="m-3 my-0 col bg-danger text-center text-white fs-4 rounded-3">DNI</label>
+        <input required id="dni" name="dni" placeholder="formato 00.000.000" type="text"
+          class="m-3 my-0 col rounded-3 fs-4">
+      </div>
+      <div class="row container-fluid mt-3">
+        <label for="ncuenta" class="m-3 my-0 col bg-danger text-center text-white fs-4 rounded-3">Nº Cuenta</label>
+        <input required id="ncuenta" minlength="3" name="ncuenta" type="number" class="m-3 my-0 col rounded-3 fs-4">
+      </div>
+      <div class="row container-fluid mt-3">
+        <label for="tipocuenta" class="m-3 my-0 col bg-danger text-center text-white fs-4 rounded-3">Tipo de
+          Cuenta</label>
+        <select required id="tipocuenta" name="tipocuenta" type="" class="m-3 my-0 col rounded-3 fs-4">
+          <option value="Cuenta Corriente">Cuenta Corriente</option>
+          <option value="Plazo Fijo">Plazo Fijo</option>
+          <option value="Fondo Inversion">Fondo Inversion</option>
+          <option value="Caja Ahorro">Caja Ahorro</option>
+        </select>
+      </div>
+      <div class="row container-fluid mt-3">
+        <label for="monto" class="m-3 my-0 col bg-danger text-center text-white fs-4 rounded-3">Monto a
+          Depositar</label>
+        <input required id="monto" min="1000" name="monto" type="number" class="m-3 my-0 col rounded-3 fs-4">
+      </div>
+      <div class="row container-fluid mt-3">
+        <label for="dias" class="m-3 my-0 col bg-danger text-center text-white fs-4 rounded-3">Dias de Deposito</label>
+        <input required id="dias" min="30" name="dias" type="number" class="m-3 my-0 col rounded-3 fs-4">
+      </div>
+      <br>
+      <button onclick="registrar()" id="btn-registrar" class="btn-info col-12 rounded-3 text-white">Registrar
+        Datos</button>
+
+      <div class="row container-fluid mt-3">
+        <label for="saldo" class="m-3 my-0 col bg-danger text-center text-white fs-4 rounded-3">La cuenta se registró
+          correctamente <br>
+          Al finalizar el período de su inversión obtendrá:</label>
+        <label id="saldo" name="saldo" type="text" class="m-3 my-0 col-3 rounded-3 fs-4"></label>
+      </div>
+      <br>
+      <a href="./listado-clientes.html" target="_self">
+        <button id="btn-registrar" class="btn-info col-12 rounded-3 text-white text-center">Ver Listado
+          Completo</button>
+      </a>
+    </div>
+  </div>
+
+  <!-- Optional JavaScript; choose one of the two! -->
+
+  <!-- Option 1: Bootstrap Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous">
+  </script>
+
+  <script>
+    function registrar() {
+      var apellido = document.getElementById('apellido').value;
+      var dni = parseInt(document.getElementById('dni').value);
+      var ncuenta = document.getElementById('ncuenta').value;
+      var tipocuenta = document.getElementById('tipocuenta').value;
+      var monto = parseFloat(document.getElementById('monto').value);
+      var dias = parseInt(document.getElementById('dias').value);
+      var capitalText = document.getElementById('saldo');
+
+      var fondo = false;
+      var typeAcc = ""
+
+      if (tipocuenta === "Fondo Inversion") {
+        fondo = true;
+        typeAcc = "FI";
+      } else if (tipocuenta === "Cuenta Corriente") {
+        typeAcc = "CA";
+      } else if (tipocuenta === "Caja Ahorro") {
+        typeAcc = "CA";
+      } else if (tipocuenta === "Plazo Fijo") {
+        typeAcc = "PF";
+      }
+
+      var capital = 0;
+
+      var interes = 0;
+
+      if (fondo) {
+        if (dias < 90) {
+          console.log("No puede ser menos de 90 dias");
+          interes = 0;
+          alert("Las suscripciones a Fondos de Inversion no pueden tener una duración menor a 90")
+        } else if (dias > 90) {
+          console.log("5%");
+          interes = 0.05;
+        }
+      } else {
+
+        if (dias > 90) {
+          interes += 0.01;
+        }
+
+        if (monto >= 1000 && monto < 10000) {
+          console.log("2%");
+          interes += 0.02;
+        } else if (monto >= 10000 && monto < 100000) {
+          console.log("3%");
+          interes += 0.03;
+        } else if (monto >= 100000 && monto < 1000000) {
+          console.log("4%");
+          interes += 0.04;
+        } else {
+          console.log("indefinido");
+          interes = 0;
+        }
+
+      }
+
+      if (interes > 0) {
+        capital = monto + (monto * interes / 30) * dias;
+        capitalText.textContent = `$ ${capital}`;
+        crear(dni, apellido, ncuenta, typeAcc, monto, dias, capital)
+      } else {
+        capital = monto + (monto * interes / 30) * dias;
+        capitalText.textContent = `$ ${capital}`;
+      }
+
+      console.log(apellido);
+      console.log(dni);
+      console.log(ncuenta);
+      console.log(typeAcc);
+      console.log(interes)
+      console.log(monto);
+      console.log(dias);
+    }
+
+    function crear(dni, apellido, nroCuenta, tipoCuenta, monto, dias, capital){
+      const url = `http://localhost:8866/Agregar/?dni=${dni}&apellido=${apellido}&nroCuenta=${nroCuenta}&tipoCuenta=${tipoCuenta}&monto=${monto}&dias=${dias}&capital=${capital}`;
+
+      fetch(url)
+        .then(data => {
+          return data.json()
+        })
+        alert("Cliente Registrado");
+    }
+  </script>
+
+  <!-- Option 2: Separate Popper and Bootstrap JS -->
+  <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.min.js" integrity="sha384-lpyLfhYuitXl2zRZ5Bn2fqnhNAKOAaM/0Kr9laMspuaMiZfGmfwRNFh8HlMy49eQ" crossorigin="anonymous"></script>
+    -->
+</body>
+
+</html>

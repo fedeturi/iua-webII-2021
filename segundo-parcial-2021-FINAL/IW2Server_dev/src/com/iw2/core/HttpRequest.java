@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.company;
+package com.iw2.core;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -11,7 +11,9 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.PrintStream;
+import java.net.Socket;
 import java.util.StringTokenizer;
 
 /**
@@ -50,49 +52,43 @@ public class HttpRequest {
   public String getAccion() throws IOException {
     accion = null;
     String[] palabras = HttpRequest[0].split("/");
-    if (palabras[1].contains("HTTP")){
-      accion = palabras[1].substring(0, palabras[1].indexOf("HTTP")).trim();
-    } else {
-      accion = palabras[1];
-    }
+    accion = palabras[1].substring(0, palabras[1].indexOf("HTTP")).trim();
     return accion;
   }
 
   public String[] getParametros() throws IOException {
     parametros = null;
     String[] palabras = HttpRequest[0].split("/");
-    String Pedido;
-    if (palabras[1].contains("HTTP")){
-      Pedido = palabras[1].substring(0, palabras[1].indexOf("HTTP")).trim();
-    } else if(palabras[2].contains("HTTP")){
-      Pedido = palabras[2].split("HTTP")[0];
-    } else {
-      Pedido = "";
-    }
+    String Pedido = palabras[1].substring(0, palabras[1].indexOf("HTTP"));
+    Sout(Pedido);
     if (Pedido.length() > 0) {
+      Sout("Estoy en length >0");
       if (Pedido.indexOf("?") != -1) { // hay `por lo menos un parametro
-        Pedido = Pedido.substring(1, Pedido.indexOf(" "));
+        Sout("Estoy en no tengo ?");
         if (Pedido.indexOf("&") == -1) { // Hay un solo parametro
-          //Sout("Estoy en no tengo &");
+          Sout("Estoy en no tengo &");
           Pedido += "&";
           parametros = Pedido.split("&");
         } else {
-          parametros = Pedido.split("&");
+          parametros = Pedido.substring(1).split("&");
         }
       } else {
         parametros = null;
         Sout("Estoy en no envíe parametros ....");
       }
-    }    return parametros;
+    }
+    return parametros;
   }
 
   public String getValorParametro(String parametro) throws IOException {
-    String[] parametros = getParametros();
+    String Busqueda = parametro;
     String Valor = null;
     for (int i = 0; i < parametros.length; i++) {
-      if (parametros[i].contains(parametro)) {
-        Valor = parametros[i].split("=")[1];
+
+      if (parametros[i].contains(Busqueda)) {
+        Valor = parametros[i].substring(parametros[i].indexOf("=") + 1);
       }
+
     }
     return Valor;
   }
@@ -126,7 +122,7 @@ public class HttpRequest {
 
         // Si no pidieron nada, enviamos la página index.html
         if (filename.endsWith("/"))
-          filename += "index.html";
+          filename += "com/company/index.html";
 
         // quitamos la / del nombre del archivo
         while (filename.indexOf("/") == 0)
@@ -162,8 +158,7 @@ public class HttpRequest {
     // Open the file (may throw FileNotFoundException)
 
     System.out.println(filename);
-
-    InputStream f = getClass().getResourceAsStream(filename);
+    InputStream f = new FileInputStream(filename);
 
     // Determine the MIME type and print HTTP header
     String mimeType = "text/plain";
